@@ -66,18 +66,18 @@ export default function SyncPage() {
   const isRunning = state?.running ?? false;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold" style={{ color: "var(--color-text-primary)" }}>Sync & Database</h1>
-        <p style={{ color: "var(--color-text-secondary)" }} className="mt-2 text-sm">Manage data synchronization</p>
+    <div className="max-w-3xl mx-auto space-y-10">
+      <div>
+        <h1 className="section-title">Data Synchronization</h1>
+        <p className="section-subtitle">Manage your Facebook data sync and database operations</p>
       </div>
 
       {/* Status card */}
-      <div className="card p-6 space-y-4">
-        <div className="flex items-center gap-3">
-          <span className={`w-3 h-3 rounded-full ${isRunning ? "bg-amber-400 animate-pulse" : state ? "bg-green-500" : "bg-gray-500"}`} />
-          <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
-            {isRunning ? "Sync in progress…" : state ? "Idle" : "Not connected"}
+      <div className="card space-y-4">
+        <div className="flex items-center gap-3 mb-4">
+          <div className={`w-3 h-3 rounded-full ${isRunning ? "bg-amber-400 animate-pulse" : state ? "bg-green-500" : "bg-gray-600"}`} />
+          <span className="font-medium" style={{ color: "var(--color-text)" }}>
+            {isRunning ? "Sync in progress…" : state ? "Ready" : "Not connected"}
           </span>
         </div>
 

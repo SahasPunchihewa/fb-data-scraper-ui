@@ -75,44 +75,49 @@ export default function DashboardPage() {
   }));
 
   return (
-    <div className="space-y-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold" style={{ color: "var(--color-text-primary)" }}>Dashboard</h1>
-        <p style={{ color: "var(--color-text-secondary)" }} className="mt-2 text-sm">Track your Facebook engagement metrics</p>
+    <div className="space-y-10">
+      <div>
+        <h1 className="section-title">Dashboard</h1>
+        <p className="section-subtitle">Your Facebook engagement overview at a glance</p>
       </div>
 
-      {/* Stats row */}
+      {/* Stats grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard title="Posts" value={stats.total_posts} icon="📄" color="primary" />
-        <StatCard title="Reactions" value={stats.total_reactions.toLocaleString()} icon="👍" color="amber" />
-        <StatCard title="Comments" value={stats.total_comments.toLocaleString()} icon="💬" color="blue" />
-        <StatCard title="Friends" value={stats.total_friends.toLocaleString()} icon="🧑‍🤝‍🧑" color="emerald" />
-        <StatCard title="Followers" value={stats.total_followers.toLocaleString()} icon="👣" color="rose" />
+        <StatCard title="Reactions" value={stats.total_reactions.toLocaleString()} icon="👍" color="warning" />
+        <StatCard title="Comments" value={stats.total_comments.toLocaleString()} icon="💬" color="accent" />
+        <StatCard title="Friends" value={stats.total_friends.toLocaleString()} icon="🧑‍🤝‍🧑" color="success" />
+        <StatCard title="Followers" value={stats.total_followers.toLocaleString()} icon="👣" color="danger" />
       </div>
 
       {/* Engagement rates */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <EngagementCard
-          title="Friend Engagement"
-          engaged={stats.friend_engagement.engaged}
-          total={stats.friend_engagement.total}
-          rate={stats.friend_engagement.rate}
-          color="indigo"
-        />
-        <EngagementCard
-          title="Follower Engagement"
-          engaged={stats.follower_engagement.engaged}
-          total={stats.follower_engagement.total}
-          rate={stats.follower_engagement.rate}
-          color="sky"
-        />
+      <div>
+        <h2 className="text-xl font-bold mb-4" style={{ color: "var(--color-text)" }}>Engagement Metrics</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <EngagementCard
+            title="Friend Engagement"
+            engaged={stats.friend_engagement.engaged}
+            total={stats.friend_engagement.total}
+            rate={stats.friend_engagement.rate}
+            color="indigo"
+          />
+          <EngagementCard
+            title="Follower Engagement"
+            engaged={stats.follower_engagement.engaged}
+            total={stats.follower_engagement.total}
+            rate={stats.follower_engagement.rate}
+            color="sky"
+          />
+        </div>
       </div>
 
       {/* Charts row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div>
+        <h2 className="text-xl font-bold mb-4" style={{ color: "var(--color-text)" }}>Analysis</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Reaction types */}
-        <div className="card p-6">
-          <h2 className="text-base font-semibold mb-6" style={{ color: "var(--color-text-primary)" }}>Reaction Types</h2>
+        <div className="card">
+          <h3 className="text-base font-semibold mb-4" style={{ color: "var(--color-text)" }}>Reaction Types</h3>
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={reactionTypesData} layout="vertical" margin={{ left: 16 }}>
               <CartesianGrid strokeDasharray="3 3" horizontal={false} />
@@ -125,8 +130,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Unique people by relation */}
-        <div className="card p-6">
-          <h2 className="text-base font-semibold mb-6" style={{ color: "var(--color-text-primary)" }}>Unique Interactors by Relation</h2>
+        <div className="card">
+          <h3 className="text-base font-semibold mb-4" style={{ color: "var(--color-text)" }}>Unique Interactors by Relation</h3>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
               <Pie
@@ -148,11 +153,12 @@ export default function DashboardPage() {
             </PieChart>
           </ResponsiveContainer>
         </div>
+        </div>
       </div>
 
       {/* Reactions + comments by relation */}
-      <div className="card p-6">
-        <h2 className="text-base font-semibold mb-6" style={{ color: "var(--color-text-primary)" }}>Reactions & Comments by Relation</h2>
+      <div className="card">
+        <h3 className="text-base font-semibold mb-4" style={{ color: "var(--color-text)" }}>Reactions & Comments by Relation</h3>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={reactionsByRelData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -168,8 +174,8 @@ export default function DashboardPage() {
 
       {/* Top friends */}
       {topFriends.length > 0 && (
-        <div className="card p-6">
-          <h2 className="text-base font-semibold mb-6" style={{ color: "var(--color-text-primary)" }}>Top Friends by Interactions</h2>
+        <div className="card">
+          <h3 className="text-base font-semibold mb-4" style={{ color: "var(--color-text)" }}>Top Friends by Interactions</h3>
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={topFriends} layout="vertical" margin={{ left: 130 }}>
               <CartesianGrid strokeDasharray="3 3" horizontal={false} />

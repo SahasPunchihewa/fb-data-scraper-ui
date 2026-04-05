@@ -2,31 +2,43 @@ interface Props {
   title: string;
   value: string | number;
   sub?: string;
-  color?: "primary" | "emerald" | "amber" | "rose" | "blue";
+  color?: "primary" | "accent" | "danger" | "warning" | "success";
   icon?: string;
 }
 
 const colorMap = {
-  primary: { border: "#22c55e", accent: "#86efac" },
-  emerald: { border: "#10b981", accent: "#6ee7b7" },
-  amber: { border: "#f59e0b", accent: "#fcd34d" },
-  rose: { border: "#f43f5e", accent: "#fb7185" },
-  blue: { border: "#3b82f6", accent: "#93c5fd" },
+  primary: "#238636",
+  accent: "#58a6ff",
+  danger: "#f85149",
+  warning: "#d29922",
+  success: "#3fb950",
 };
 
 export default function StatCard({ title, value, sub, color = "primary", icon }: Props) {
-  const colors = colorMap[color];
+  const accentColor = colorMap[color];
   return (
     <div 
-      className="card p-6 border-l-4 hover:shadow-lg transition-all duration-200"
-      style={{ borderLeftColor: colors.border }}
+      className="stat-box"
+      style={{
+        borderLeft: `3px solid ${accentColor}`
+      }}
     >
-      <div className="flex items-center justify-between gap-4">
-        <p className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>{title}</p>
-        {icon && <span className="text-2xl">{icon}</span>}
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          <p className="text-xs font-semibold tracking-wide" style={{ color: "var(--color-text-muted)" }}>
+            {title.toUpperCase()}
+          </p>
+          <p className="mt-2 text-4xl font-bold" style={{ color: "var(--color-text)" }}>
+            {value}
+          </p>
+          {sub && (
+            <p className="mt-2 text-sm" style={{ color: "var(--color-text-secondary)" }}>
+              {sub}
+            </p>
+          )}
+        </div>
+        {icon && <span className="text-3xl">{icon}</span>}
       </div>
-      <p className="mt-3 text-3xl font-bold" style={{ color: colors.accent }}>{value}</p>
-      {sub && <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>{sub}</p>}
     </div>
   );
 }

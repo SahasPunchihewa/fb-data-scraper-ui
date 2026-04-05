@@ -5,16 +5,21 @@
 }
 
 @theme {
-  --color-background: #0a0e1f;
-  --color-surface: #141827;
-  --color-surface-light: #1a1f36;
-  --color-primary: #22c55e;
-  --color-accent: #3b82f6;
-  --color-secondary: #a855f7;
-  --color-border: #262b44;
-  --color-text-primary: #f1f5fa;
-  --color-text-secondary: #a0aec0;
-  --color-text-muted: #718096;
+  --color-bg: #0d1117;
+  --color-bg-secondary: #010409;
+  --color-surface: #161b22;
+  --color-surface-alt: #21262d;
+  --color-border: #30363d;
+  --color-primary: #238636;
+  --color-primary-hover: #2ea043;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-danger: #f85149;
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+  --color-text: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-muted: #6e7681;
 }
 
 @layer base {
@@ -23,24 +28,24 @@
   }
 
   body {
-    background: var(--color-background);
-    color: var(--color-text-primary);
+    background: linear-gradient(to bottom, #0d1117 0%, #010409 100%);
+    color: var(--color-text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-background);
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
     background: var(--color-border);
-    border-radius: 4px;
+    border-radius: 5px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -50,22 +55,72 @@
 
 @layer components {
   .card {
-    @apply bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg;
+    @apply rounded-lg border p-6 transition-all duration-200;
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+
+  .card:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-alt);
   }
 
   .btn-primary {
-    @apply bg-[var(--color-primary)] hover:bg-emerald-500 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-emerald-500/20;
+    @apply font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 text-white font-medium;
+    background: var(--color-primary);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-primary-hover);
   }
 
   .btn-secondary {
-    @apply bg-[var(--color-surface)] hover:bg-[var(--color-surface-light)] text-[var(--color-text-primary)] font-semibold py-2.5 px-4 rounded-lg border border-[var(--color-border)] transition-all duration-200;
+    @apply font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 border;
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
   }
 
-  .stat-card {
-    @apply card p-6 space-y-2;
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--color-surface-alt);
+    border-color: var(--color-accent);
+  }
+
+  .btn-ghost {
+    @apply font-medium py-2 px-3 rounded-lg transition-all duration-200;
+    color: var(--color-text-secondary);
+  }
+
+  .btn-ghost:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .stat-box {
+    @apply card space-y-3;
   }
 
   .section-title {
-    @apply text-2xl font-bold text-[var(--color-text-primary)];
+    @apply text-3xl font-bold tracking-tight;
+    color: var(--color-text);
+  }
+
+  .section-subtitle {
+    @apply text-sm;
+    color: var(--color-text-secondary);
+  }
+
+  .table-header {
+    background: var(--color-surface-alt);
+    border-color: var(--color-border);
+  }
+
+  .table-row {
+    @apply transition-colors duration-200;
+    border-color: var(--color-border);
+  }
+
+  .table-row:hover {
+    background: var(--color-surface-alt);
   }
 }
