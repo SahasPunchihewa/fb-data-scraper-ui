@@ -1,32 +1,71 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 * {
   box-sizing: border-box;
 }
 
+@theme {
+  --color-background: #0a0e1f;
+  --color-surface: #141827;
+  --color-surface-light: #1a1f36;
+  --color-primary: #22c55e;
+  --color-accent: #3b82f6;
+  --color-secondary: #a855f7;
+  --color-border: #262b44;
+  --color-text-primary: #f1f5fa;
+  --color-text-secondary: #a0aec0;
+  --color-text-muted: #718096;
+}
+
 @layer base {
   html {
     color-scheme: dark;
-    --dark-mode-v1: 1;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: var(--color-background);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #334155;
-    border-radius: 5px;
+    background: var(--color-border);
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: var(--color-accent);
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg;
+  }
+
+  .btn-primary {
+    @apply bg-[var(--color-primary)] hover:bg-emerald-500 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-emerald-500/20;
+  }
+
+  .btn-secondary {
+    @apply bg-[var(--color-surface)] hover:bg-[var(--color-surface-light)] text-[var(--color-text-primary)] font-semibold py-2.5 px-4 rounded-lg border border-[var(--color-border)] transition-all duration-200;
+  }
+
+  .stat-card {
+    @apply card p-6 space-y-2;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold text-[var(--color-text-primary)];
   }
 }

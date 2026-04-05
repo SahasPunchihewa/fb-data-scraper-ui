@@ -70,8 +70,11 @@ export default function PeoplePage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">People</h1>
-        <span className="text-sm text-slate-400">{total.toLocaleString()} total</span>
+        <div>
+          <h1 className="text-4xl font-bold" style={{ color: "var(--color-text-primary)" }}>People</h1>
+          <p style={{ color: "var(--color-text-secondary)" }} className="mt-2 text-sm">Manage and view all interactions</p>
+        </div>
+        <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>{total.toLocaleString()} total</span>
       </div>
 
       {/* Search */}
@@ -81,11 +84,16 @@ export default function PeoplePage() {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Search by name…"
-          className="flex-1 border border-slate-600 bg-slate-800 rounded-lg px-4 py-2 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          className="flex-1 card px-4 py-2.5 text-sm focus:outline-none transition-all"
+          style={{
+            background: "var(--color-surface)",
+            borderColor: "var(--color-border)",
+            color: "var(--color-text-primary)",
+          }}
         />
         <button
           type="submit"
-          className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-cyan-500 hover:to-blue-500 transition-all"
+          className="btn-primary text-sm"
         >
           Search
         </button>
@@ -93,7 +101,7 @@ export default function PeoplePage() {
           <button
             type="button"
             onClick={() => { setSearch(""); setSearchInput(""); setOffset(0); }}
-            className="px-3 py-2 rounded-lg text-sm text-slate-400 hover:bg-slate-700 transition-colors"
+            className="btn-secondary text-sm"
           >
             ✕
           </button>
@@ -108,9 +116,13 @@ export default function PeoplePage() {
             onClick={() => handleRelationChange(r.value)}
             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
               relation === r.value
-                ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/20"
-                : "bg-slate-800 border border-slate-600 text-slate-300 hover:border-slate-500 hover:text-slate-100"
+                ? "text-white"
+                : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
             }`}
+            style={{
+              background: relation === r.value ? "var(--color-primary)" : "var(--color-surface)",
+              border: relation === r.value ? "none" : "1px solid var(--color-border)",
+            }}
           >
             {r.label}
           </button>
@@ -118,46 +130,47 @@ export default function PeoplePage() {
       </div>
 
       {/* Table */}
-      <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 overflow-hidden">
+      <div className="card overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center h-48">
-            <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 rounded-full animate-spin" style={{ borderColor: "var(--color-border)", borderTopColor: "var(--color-accent)" }} />
           </div>
         ) : error ? (
-          <div className="p-8 text-center text-rose-400 text-sm">{error}</div>
+          <div className="p-8 text-center text-sm" style={{ color: "#fb7185" }}>{error}</div>
         ) : data.length === 0 ? (
-          <div className="p-8 text-center text-slate-400 text-sm">No people found</div>
+          <div className="p-8 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>No people found</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-900 border-b border-slate-700">
+              <thead style={{ background: "var(--color-surface-light)", borderColor: "var(--color-border)" }} className="border-b">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide w-12">#</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide">Name</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide">Relation</th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-slate-300 uppercase tracking-wide">Reactions</th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-slate-300 uppercase tracking-wide">Comments</th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold text-slate-300 uppercase tracking-wide">Total</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide">Reaction Types</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide w-12" style={{ color: "var(--color-text-secondary)" }}>#</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-secondary)" }}>Name</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-secondary)" }}>Relation</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-secondary)" }}>Reactions</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-secondary)" }}>Comments</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-secondary)" }}>Total</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-secondary)" }}>Reaction Types</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700">
+              <tbody style={{ borderColor: "var(--color-border)" }} className="divide-y">
                 {data.map((person, idx) => (
-                  <tr key={person.id} className="hover:bg-slate-700/50 transition-colors">
-                    <td className="px-4 py-3 text-slate-500">{offset + idx + 1}</td>
-                    <td className="px-4 py-3 font-medium text-slate-100">{person.name}</td>
+                  <tr key={person.id} className="transition-all hover:bg-[var(--color-surface-light)]">
+                    <td className="px-4 py-3" style={{ color: "var(--color-text-muted)" }}>{offset + idx + 1}</td>
+                    <td className="px-4 py-3 font-medium" style={{ color: "var(--color-text-primary)" }}>{person.name}</td>
                     <td className="px-4 py-3">
                       <RelationBadge relation={person.relation} />
                     </td>
-                    <td className="px-4 py-3 text-right text-cyan-400 font-medium">{person.reactions}</td>
-                    <td className="px-4 py-3 text-right text-amber-400 font-medium">{person.comments}</td>
-                    <td className="px-4 py-3 text-right font-bold text-slate-200">{person.total_interactions}</td>
+                    <td className="px-4 py-3 text-right font-medium" style={{ color: "var(--color-accent)" }}>{person.reactions}</td>
+                    <td className="px-4 py-3 text-right font-medium" style={{ color: "#f59e0b" }}>{person.comments}</td>
+                    <td className="px-4 py-3 text-right font-bold" style={{ color: "var(--color-text-primary)" }}>{person.total_interactions}</td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {Object.entries(person.reaction_types).map(([type, count]) => (
                           <span
                             key={type}
-                            className="inline-flex items-center gap-0.5 bg-slate-700 text-slate-300 text-xs px-1.5 py-0.5 rounded"
+                            className="inline-flex items-center gap-0.5 text-xs px-2 py-1 rounded"
+                            style={{ background: "var(--color-surface-light)", color: "var(--color-text-secondary)" }}
                           >
                             {REACTION_EMOJI[type] ?? "❔"} {count}
                           </span>

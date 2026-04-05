@@ -67,31 +67,34 @@ export default function SyncPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Sync JSON → Database</h1>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold" style={{ color: "var(--color-text-primary)" }}>Sync & Database</h1>
+        <p style={{ color: "var(--color-text-secondary)" }} className="mt-2 text-sm">Manage data synchronization</p>
+      </div>
 
       {/* Status card */}
-      <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 p-6 space-y-4">
+      <div className="card p-6 space-y-4">
         <div className="flex items-center gap-3">
-          <span className={`w-3 h-3 rounded-full ${isRunning ? "bg-amber-400 animate-pulse" : state ? "bg-emerald-400" : "bg-slate-500"}`} />
-          <span className="text-sm font-medium text-slate-100">
+          <span className={`w-3 h-3 rounded-full ${isRunning ? "bg-amber-400 animate-pulse" : state ? "bg-green-500" : "bg-gray-500"}`} />
+          <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
             {isRunning ? "Sync in progress…" : state ? "Idle" : "Not connected"}
           </span>
         </div>
 
         {state?.error && (
-          <div className="bg-slate-900 border border-rose-500/50 rounded-lg px-4 py-3 text-rose-400 text-sm shadow-lg shadow-rose-500/10">
+          <div className="rounded-lg px-4 py-3 text-sm" style={{ background: "rgba(244, 63, 94, 0.1)", borderLeft: "3px solid #f43f5e", color: "#fb7185" }}>
             ⚠️ {state.error}
           </div>
         )}
 
         {state?.last_result && (
-          <div className="bg-slate-900 rounded-lg p-4 space-y-2 border border-slate-700">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Last sync result</p>
+          <div className="rounded-lg p-4 space-y-3" style={{ background: "var(--color-surface-light)", borderColor: "var(--color-border)" }} className="border">
+            <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-muted)" }}>Last sync result</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {Object.entries(state.last_result).map(([key, val]) => (
-                <div key={key} className="bg-slate-800 rounded-lg border border-slate-600 p-3 text-center">
-                  <p className="text-xl font-bold text-cyan-400">{val}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">{key.replace(/_/g, " ")}</p>
+                <div key={key} className="rounded-lg p-3 text-center card">
+                  <p className="text-xl font-bold" style={{ color: "var(--color-primary)" }}>{val}</p>
+                  <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>{key.replace(/_/g, " ")}</p>
                 </div>
               ))}
             </div>
@@ -99,7 +102,7 @@ export default function SyncPage() {
         )}
 
         {message && (
-          <p className="text-sm text-cyan-400 font-medium">{message}</p>
+          <p className="text-sm font-medium" style={{ color: "var(--color-primary)" }}>{message}</p>
         )}
       </div>
 
@@ -108,7 +111,7 @@ export default function SyncPage() {
         <button
           onClick={startSync}
           disabled={isRunning || loading}
-          className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-lg shadow-cyan-500/20"
+          className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed py-3"
         >
           {isRunning ? (
             <>
@@ -116,26 +119,27 @@ export default function SyncPage() {
               Syncing…
             </>
           ) : (
-            "🔄  Sync Now"
+            "🔄 Sync Now"
           )}
         </button>
 
         <button
           onClick={doReset}
           disabled={isRunning || resetting}
-          className="flex-1 flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-rose-400 font-semibold py-3 px-6 rounded-xl transition-colors border border-rose-500/50 shadow-lg shadow-rose-500/10"
+          className="flex-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed py-3 rounded-lg font-semibold transition-all"
+          style={{ background: "rgba(244, 63, 94, 0.15)", color: "#fb7185", border: "1px solid rgba(244, 63, 94, 0.3)" }}
         >
-          {resetting ? "Resetting…" : "🗑  Reset Database"}
+          {resetting ? "Resetting…" : "🗑 Reset Database"}
         </button>
       </div>
 
       {/* Info */}
-      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-5 text-sm text-slate-200 space-y-1 border border-slate-700 shadow-lg shadow-slate-900/50">
-        <p className="font-semibold text-slate-100">How it works</p>
-        <ul className="list-disc list-inside space-y-1 text-slate-300">
-          <li>Reads <code className="text-cyan-400">connections/friends/your_friends.json</code></li>
-          <li>Reads <code className="text-cyan-400">connections/followers/people_who_followed_you.json</code></li>
-          <li>Reads all <code className="text-cyan-400">insights/post*_reactions.json</code> files</li>
+      <div className="card p-6 space-y-3">
+        <p className="font-semibold text-base" style={{ color: "var(--color-text-primary)" }}>How it works</p>
+        <ul className="list-disc list-inside space-y-2 text-sm" style={{ color: "var(--color-text-secondary)" }}>
+          <li>Reads <code style={{ color: "var(--color-accent)" }}>connections/friends/your_friends.json</code></li>
+          <li>Reads <code style={{ color: "var(--color-accent)" }}>connections/followers/people_who_followed_you.json</code></li>
+          <li>Reads all <code style={{ color: "var(--color-accent)" }}>insights/post*_reactions.json</code> files</li>
           <li>Upserts everything into PostgreSQL (idempotent)</li>
         </ul>
       </div>

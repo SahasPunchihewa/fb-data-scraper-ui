@@ -2,35 +2,31 @@ interface Props {
   title: string;
   value: string | number;
   sub?: string;
-  color?: "indigo" | "emerald" | "amber" | "rose" | "sky";
+  color?: "primary" | "emerald" | "amber" | "rose" | "blue";
   icon?: string;
 }
 
 const colorMap = {
-  indigo: "border-l-cyan-500 bg-gradient-to-br from-slate-800 to-slate-900 text-cyan-400 shadow-lg shadow-cyan-500/10",
-  emerald: "border-l-emerald-500 bg-gradient-to-br from-slate-800 to-slate-900 text-emerald-400 shadow-lg shadow-emerald-500/10",
-  amber: "border-l-amber-500 bg-gradient-to-br from-slate-800 to-slate-900 text-amber-400 shadow-lg shadow-amber-500/10",
-  rose: "border-l-rose-500 bg-gradient-to-br from-slate-800 to-slate-900 text-rose-400 shadow-lg shadow-rose-500/10",
-  sky: "border-l-sky-500 bg-gradient-to-br from-slate-800 to-slate-900 text-sky-400 shadow-lg shadow-sky-500/10",
+  primary: { border: "#22c55e", accent: "#86efac" },
+  emerald: { border: "#10b981", accent: "#6ee7b7" },
+  amber: { border: "#f59e0b", accent: "#fcd34d" },
+  rose: { border: "#f43f5e", accent: "#fb7185" },
+  blue: { border: "#3b82f6", accent: "#93c5fd" },
 };
 
-const titleMap = {
-  indigo: "text-slate-300",
-  emerald: "text-slate-300",
-  amber: "text-slate-300",
-  rose: "text-slate-300",
-  sky: "text-slate-300",
-};
-
-export default function StatCard({ title, value, sub, color = "indigo", icon }: Props) {
+export default function StatCard({ title, value, sub, color = "primary", icon }: Props) {
+  const colors = colorMap[color];
   return (
-    <div className={`rounded-xl border-l-4 p-5 ${colorMap[color]}`}>
-      <div className="flex items-center justify-between">
-        <p className={`text-sm font-medium ${titleMap[color]}`}>{title}</p>
+    <div 
+      className="card p-6 border-l-4 hover:shadow-lg transition-all duration-200"
+      style={{ borderLeftColor: colors.border }}
+    >
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>{title}</p>
         {icon && <span className="text-2xl">{icon}</span>}
       </div>
-      <p className={`mt-2 text-3xl font-bold ${colorMap[color].split(" ")[4]}`}>{value}</p>
-      {sub && <p className="mt-1 text-xs text-slate-400">{sub}</p>}
+      <p className="mt-3 text-3xl font-bold" style={{ color: colors.accent }}>{value}</p>
+      {sub && <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>{sub}</p>}
     </div>
   );
 }

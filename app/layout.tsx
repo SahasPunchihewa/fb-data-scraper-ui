@@ -17,9 +17,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 min-h-screen text-slate-50`}>
+      <body className={`${inter.className} min-h-screen`}>
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 py-8">{children}</main>
+        <main className="max-w-7xl mx-auto px-6 py-12">{children}</main>
       </body>
     </html>
   );

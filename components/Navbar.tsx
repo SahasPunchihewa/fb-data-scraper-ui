@@ -13,20 +13,20 @@ const links = [
 export default function Navbar() {
   const path = usePathname();
   return (
-    <nav className="bg-slate-900 border-b border-slate-700 backdrop-blur-sm sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 flex items-center gap-8 h-14">
-        <span className="font-bold text-lg tracking-tight text-white">
+    <nav className="sticky top-0 z-40 border-b border-[var(--color-border)] backdrop-blur-sm" style={{ background: "var(--color-surface)" }}>
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+        <span className="font-bold text-lg tracking-tight" style={{ color: "var(--color-text-primary)" }}>
           📊 FB Insights
         </span>
-        <div className="flex gap-1">
+        <div className="flex gap-2">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 path === l.href
-                  ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/20"
-                  : "text-slate-300 hover:text-white hover:bg-slate-800"
+                  ? "bg-[var(--color-primary)] text-white shadow-lg"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-light)]"
               }`}
             >
               {l.label}
