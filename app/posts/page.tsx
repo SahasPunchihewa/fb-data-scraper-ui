@@ -22,10 +22,10 @@ const RELATION_SHORT: Record<string, string> = {
 };
 
 const RELATION_COLORS: Record<string, string> = {
-  friend: "bg-indigo-100 text-indigo-700",
-  friend_and_follower: "bg-amber-100 text-amber-700",
-  follower_only: "bg-sky-100 text-sky-700",
-  other: "bg-slate-100 text-slate-600",
+  friend: "bg-slate-800 text-cyan-400 border border-cyan-500/30",
+  friend_and_follower: "bg-slate-800 text-amber-400 border border-amber-500/30",
+  follower_only: "bg-slate-800 text-sky-400 border border-sky-500/30",
+  other: "bg-slate-800 text-slate-400 border border-slate-600",
 };
 
 type SortKey = "post_number" | "total_reactions" | "total_comments" | "total";
@@ -65,68 +65,68 @@ export default function PostsPage() {
   if (loading)
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
 
   if (error)
     return (
-      <div className="bg-rose-50 border border-rose-200 rounded-xl p-6 text-rose-700 text-sm">{error}</div>
+      <div className="bg-slate-800 border border-rose-500/50 rounded-xl p-6 text-rose-400 text-sm shadow-lg shadow-rose-500/10">{error}</div>
     );
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-800">Posts</h1>
-        <span className="text-sm text-slate-500">{posts.length} posts</span>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Posts</h1>
+        <span className="text-sm text-slate-400">{posts.length} posts</span>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 border-b border-slate-200">
+            <thead className="bg-slate-900 border-b border-slate-700">
               <tr>
                 <th
                   onClick={() => toggleSort("post_number")}
-                  className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide cursor-pointer hover:text-slate-700 select-none w-24"
+                  className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide cursor-pointer hover:text-slate-100 select-none w-24"
                 >
                   Post <SortIcon col="post_number" />
                 </th>
                 <th
                   onClick={() => toggleSort("total_reactions")}
-                  className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wide cursor-pointer hover:text-slate-700 select-none"
+                  className="px-4 py-3 text-right text-xs font-semibold text-slate-300 uppercase tracking-wide cursor-pointer hover:text-slate-100 select-none"
                 >
                   Reactions <SortIcon col="total_reactions" />
                 </th>
                 <th
                   onClick={() => toggleSort("total_comments")}
-                  className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wide cursor-pointer hover:text-slate-700 select-none"
+                  className="px-4 py-3 text-right text-xs font-semibold text-slate-300 uppercase tracking-wide cursor-pointer hover:text-slate-100 select-none"
                 >
                   Comments <SortIcon col="total_comments" />
                 </th>
                 <th
                   onClick={() => toggleSort("total")}
-                  className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wide cursor-pointer hover:text-slate-700 select-none"
+                  className="px-4 py-3 text-right text-xs font-semibold text-slate-300 uppercase tracking-wide cursor-pointer hover:text-slate-100 select-none"
                 >
                   Total <SortIcon col="total" />
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide">
                   Reaction Types
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide">
                   By Relation
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-700">
               {sorted.map((post) => {
                 const total = post.total_reactions + post.total_comments;
                 return (
-                  <tr key={post.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-4 py-3 font-medium text-slate-800">{post.post_label}</td>
-                    <td className="px-4 py-3 text-right text-indigo-600 font-medium">{post.total_reactions}</td>
-                    <td className="px-4 py-3 text-right text-amber-600 font-medium">{post.total_comments}</td>
-                    <td className="px-4 py-3 text-right font-bold text-slate-700">{total}</td>
+                  <tr key={post.id} className="hover:bg-slate-700/50 transition-colors">
+                    <td className="px-4 py-3 font-medium text-slate-100">{post.post_label}</td>
+                    <td className="px-4 py-3 text-right text-cyan-400 font-medium">{post.total_reactions}</td>
+                    <td className="px-4 py-3 text-right text-amber-400 font-medium">{post.total_comments}</td>
+                    <td className="px-4 py-3 text-right font-bold text-slate-200">{total}</td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {Object.entries(post.reaction_types)
@@ -134,7 +134,7 @@ export default function PostsPage() {
                           .map(([type, count]) => (
                             <span
                               key={type}
-                              className="inline-flex items-center gap-0.5 bg-slate-100 text-slate-600 text-xs px-1.5 py-0.5 rounded"
+                              className="inline-flex items-center gap-0.5 bg-slate-700 text-slate-300 text-xs px-1.5 py-0.5 rounded"
                             >
                               {REACTION_EMOJI[type] ?? "❔"} {count}
                             </span>
@@ -148,7 +148,7 @@ export default function PostsPage() {
                           .map(([rel, count]) => (
                             <span
                               key={rel}
-                              className={`inline-flex items-center text-xs px-1.5 py-0.5 rounded font-medium ${RELATION_COLORS[rel] ?? "bg-slate-100 text-slate-500"}`}
+                              className={`inline-flex items-center text-xs px-1.5 py-0.5 rounded font-medium ${RELATION_COLORS[rel] ?? "bg-slate-700 text-slate-400"}`}
                             >
                               {RELATION_SHORT[rel] ?? rel} {count}
                             </span>
@@ -164,7 +164,7 @@ export default function PostsPage() {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-3 text-xs text-slate-500">
+      <div className="flex flex-wrap gap-3 text-xs text-slate-400">
         <span>Relation legend:</span>
         {Object.entries(RELATION_SHORT).map(([rel, short]) => (
           <span key={rel} className={`px-2 py-0.5 rounded font-medium ${RELATION_COLORS[rel]}`}>

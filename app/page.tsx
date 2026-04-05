@@ -76,7 +76,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-slate-800">Overview</h1>
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Overview</h1>
 
       {/* Stats row */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -108,8 +108,8 @@ export default function DashboardPage() {
       {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Reaction types */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-base font-semibold text-slate-700 mb-4">Reaction Types</h2>
+        <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 p-6">
+          <h2 className="text-base font-semibold text-slate-100 mb-4">Reaction Types</h2>
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={reactionTypesData} layout="vertical" margin={{ left: 16 }}>
               <CartesianGrid strokeDasharray="3 3" horizontal={false} />
@@ -122,8 +122,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Unique people by relation */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-base font-semibold text-slate-700 mb-4">Unique Interactors by Relation</h2>
+        <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 p-6">
+          <h2 className="text-base font-semibold text-slate-100 mb-4">Unique Interactors by Relation</h2>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
               <Pie
@@ -148,8 +148,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Reactions + comments by relation */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
-        <h2 className="text-base font-semibold text-slate-700 mb-4">Reactions & Comments by Relation</h2>
+      <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 p-6">
+        <h2 className="text-base font-semibold text-slate-100 mb-4">Reactions & Comments by Relation</h2>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={reactionsByRelData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -165,8 +165,8 @@ export default function DashboardPage() {
 
       {/* Top friends */}
       {topFriends.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-base font-semibold text-slate-700 mb-4">Top Friends by Interactions</h2>
+        <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 p-6">
+          <h2 className="text-base font-semibold text-slate-100 mb-4">Top Friends by Interactions</h2>
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={topFriends} layout="vertical" margin={{ left: 130 }}>
               <CartesianGrid strokeDasharray="3 3" horizontal={false} />
@@ -198,14 +198,14 @@ function EngagementCard({
   color: "indigo" | "sky";
 }) {
   const pct = Math.round(rate * 100);
-  const barColor = color === "indigo" ? "bg-indigo-500" : "bg-sky-500";
+  const barColor = color === "indigo" ? "bg-gradient-to-r from-cyan-500 to-blue-500" : "bg-gradient-to-r from-sky-500 to-cyan-500";
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
+    <div className="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/50 border border-slate-700 p-6">
       <div className="flex justify-between items-center mb-3">
-        <span className="text-sm font-medium text-slate-600">{title}</span>
-        <span className="text-2xl font-bold text-slate-800">{pct}%</span>
+        <span className="text-sm font-medium text-slate-300">{title}</span>
+        <span className="text-2xl font-bold text-cyan-400">{pct}%</span>
       </div>
-      <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+      <div className="w-full h-3 bg-slate-700 rounded-full overflow-hidden">
         <div className={`h-3 rounded-full ${barColor}`} style={{ width: `${pct}%` }} />
       </div>
       <p className="mt-2 text-xs text-slate-400">
@@ -219,8 +219,8 @@ function LoadingScreen() {
   return (
     <div className="flex items-center justify-center h-64">
       <div className="text-center space-y-3">
-        <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-slate-500 text-sm">Loading insights…</p>
+        <div className="w-10 h-10 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-slate-400 text-sm">Loading insights…</p>
       </div>
     </div>
   );
@@ -229,9 +229,9 @@ function LoadingScreen() {
 function ErrorScreen({ error }: { error: string }) {
   return (
     <div className="flex items-center justify-center h-64">
-      <div className="bg-rose-50 border border-rose-200 rounded-xl p-6 max-w-md text-center">
-        <p className="text-rose-700 font-medium">Failed to load data</p>
-        <p className="text-rose-500 text-sm mt-1">{error}</p>
+      <div className="bg-slate-800 border border-rose-500/50 rounded-xl p-6 max-w-md text-center shadow-lg shadow-rose-500/10">
+        <p className="text-rose-400 font-medium">Failed to load data</p>
+        <p className="text-rose-300 text-sm mt-1">{error}</p>
         <p className="text-slate-400 text-xs mt-3">
           Make sure the backend is running on <strong>localhost:8000</strong> and the DB has been synced.
         </p>
