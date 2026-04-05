@@ -53,74 +53,71 @@
   }
 }
 
-@layer components {
-  .card {
-    @apply rounded-lg border p-6 transition-all duration-200;
-    background: var(--color-surface);
-    border-color: var(--color-border);
-  }
+/* Utility styles */
+.card {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  transition: all 0.2s;
+  background: var(--color-surface);
+}
 
-  .card:hover {
-    border-color: var(--color-accent);
-    background: var(--color-surface-alt);
-  }
+.card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-alt);
+}
 
-  .btn-primary {
-    @apply font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 text-white font-medium;
-    background: var(--color-primary);
-  }
+.btn-primary {
+  font-weight: 600;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  color: white;
+  background: var(--color-primary);
+  border: none;
+  cursor: pointer;
+}
 
-  .btn-primary:hover:not(:disabled) {
-    background: var(--color-primary-hover);
-  }
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
 
-  .btn-secondary {
-    @apply font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 border;
-    background: var(--color-surface);
-    color: var(--color-text);
-    border-color: var(--color-border);
-  }
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
-  .btn-secondary:hover:not(:disabled) {
-    background: var(--color-surface-alt);
-    border-color: var(--color-accent);
-  }
+.btn-secondary {
+  font-weight: 600;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
 
-  .btn-ghost {
-    @apply font-medium py-2 px-3 rounded-lg transition-all duration-200;
-    color: var(--color-text-secondary);
-  }
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-surface-alt);
+  border-color: var(--color-accent);
+}
 
-  .btn-ghost:hover {
-    background: var(--color-surface);
-    color: var(--color-text);
-  }
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
-  .stat-box {
-    @apply card space-y-3;
-  }
+.stat-box {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  transition: all 0.2s;
+  background: var(--color-surface);
+  space: 0.75rem;
+}
 
-  .section-title {
-    @apply text-3xl font-bold tracking-tight;
-    color: var(--color-text);
-  }
-
-  .section-subtitle {
-    @apply text-sm;
-    color: var(--color-text-secondary);
-  }
-
-  .table-header {
-    background: var(--color-surface-alt);
-    border-color: var(--color-border);
-  }
-
-  .table-row {
-    @apply transition-colors duration-200;
-    border-color: var(--color-border);
-  }
-
-  .table-row:hover {
-    background: var(--color-surface-alt);
-  }
+.stat-box:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-alt);
 }
